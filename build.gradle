@@ -38,5 +38,6 @@ apply plugin: 'net.researchgate.release'
 release {
     failOnUnversionedFiles = false
     failOnCommitNeeded = true
+    buildTasks = ['build']
 }
 
