@@ -1,4 +1,4 @@
-package com.dc.petclinic;
+package com.dc;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
