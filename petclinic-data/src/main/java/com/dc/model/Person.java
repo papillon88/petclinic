@@ -1,6 +1,6 @@
 package com.dc.model;
 
-public class Person {
+public class Person extends BaseEntity{
 
     private String fname;
     private String lname;
