@@ -6,5 +6,14 @@
 </head>
 <body>
 <h1 th:text="'owner index'">owner index</h1>
+<table>
+    <tbody>
+    <tr th:each="owner: ${owners}">
+        <td th:text="${owner.getId()}"></td>
+        <td th:text="${owner.getFname()}"></td>
+        <td th:text="${owner.getLname()}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
