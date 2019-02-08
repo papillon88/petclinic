@@ -2,9 +2,18 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Vets Index</title>
+    <title>Vet Index</title>
 </head>
 <body>
-<h1 th:text="'vets index'">Vets page</h1>
+<h1 th:text="'vet index'"></h1>
+<table>
+    <tbody>
+    <tr th:each="vet: ${vets}">
+        <td th:text="${vet.getId()}"></td>
+        <td th:text="${vet.getFname()}"></td>
+        <td th:text="${vet.getLname()}"></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
