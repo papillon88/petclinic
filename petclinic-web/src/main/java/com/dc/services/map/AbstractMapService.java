@@ -1,33 +1,50 @@
 package com.dc.services.map;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import com.dc.model.BaseEntity;
+
+import java.util.*;
 import java.util.function.Predicate;
 
-public abstract class AbstractMapService<T, I> {
+public abstract class AbstractMapService<T extends BaseEntity> {
 
-    Map<I, T> map = new HashMap<>();
+    Map<java.lang.Long, T> map = new HashMap<>();
 
     Set<T> findAll(){
         return new HashSet<>(map.values());
     }
 
-    T findById(I id){
+    T findById(java.lang.Long id){
         return map.get(id);
     }
 
-    T save(I id, T item){
-        return map.put(id,item);
+    T save(T item){
+        if (item != null) {
+            if(item.getId() == null){
+                item.setId(this.setNextItemId());
+            }
+            map.put(item.getId(),item);
+        } else {
+            throw new RuntimeException("object cannot be null");
+        }
+        return item;
     }
 
-    void deleteById(I id){
+    void deleteById(java.lang.Long id){
         map.remove(id);
     }
 
     void delete(T item){
         Predicate<Map.Entry> testPredicate = entry -> entry.getValue().equals(item);
         map.entrySet().removeIf(testPredicate);
+    }
+
+    java.lang.Long setNextItemId(){
+        Long nextId = null;
+        try{
+            nextId = Collections.max(map.keySet()) + 1;
+        } catch (NoSuchElementException nse){
+            nextId = 1L;
+        }
+        return nextId;
     }
 }
